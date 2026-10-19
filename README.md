@@ -1,0 +1,21 @@
+# mGV-input-data
+
+Scripts to prepare the input data for mGV.
+
+## Forcing
+
+### WFDE5
+
+[`forcing/WFDE5/download-wfde5.py`](forcing/WFDE5/download-wfde5.py) downloads WFDE5 from the
+Copernicus Climate Data Store and writes daily forcing (prec, tair, psurf, vp, swdown, lwdown, wind)
+on the 5 arcmin HydroSHEDS grid to a Zarr store. It needs [uv](https://docs.astral.sh/uv/), a
+[CDS API key](https://cds.climate.copernicus.eu/how-to-api) and the HydroSHEDS DEM:
+
+```sh
+curl -LO https://data.hydrosheds.org/file/hydrosheds-v1-dem/hyd_glo_dem_15s.zip
+unzip hyd_glo_dem_15s.zip hyd_glo_dem_15s.tif
+uv run forcing/WFDE5/download-wfde5.py                         # v3.1, 1979-2024 -> WFDE5_v3.1_5arcmin.zarr
+uv run forcing/WFDE5/download-wfde5.py --version 2.1 --years 1990 1999  # other versions need --years
+```
+
+Interrupted runs continue where they stopped. See `--help` for all options.
