@@ -4,6 +4,9 @@ Scripts to prepare the input data for mGV.
 
 ## Forcing
 
+mGV requires daily weather/climate input data. To keep files on disc small,
+[it is best to store these using packing (int16 encoding) and blosc compression](https://github.com/SWIFT-WUR/mGV/issues/53).
+
 ### WFDE5
 
 [`forcing/WFDE5/download-wfde5.py`](forcing/WFDE5/download-wfde5.py) downloads WFDE5 from the
